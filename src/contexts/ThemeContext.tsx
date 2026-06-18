@@ -3,15 +3,41 @@ import { Theme } from '@/types'
 
 const ThemeContext = createContext<Theme | undefined>(undefined)
 
+function getStoredTheme(): 'light' | 'dark' | null {
+  try {
+    const stored = localStorage.getItem('theme')
+    if (stored === 'light' || stored === 'dark') return stored
+    return null
+  } catch {
+    return null
+  }
+}
+
+function prefersDark(): boolean {
+  try {
+    return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  } catch {
+    return false
+  }
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setMode] = useState<'light' | 'dark'>(() => {
-    try {
-      const stored = localStorage.getItem('theme')
-      return (stored as 'light' | 'dark') || 'light'
-    } catch {
-      return 'light'
-    }
+    if (typeof window === 'undefined') return 'light'
+    const stored = getStoredTheme()
+    if (stored) return stored
+    return prefersDark() ? 'dark' : 'light'
   })
+
+  // Sync the root element class immediately so the UI reflects the theme without waiting for effects
+  if (typeof document !== 'undefined') {
+    const root = document.documentElement
+    if (mode === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+  }
 
   useEffect(() => {
     try {
@@ -19,17 +45,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.warn('Failed to persist theme:', error)
     }
-
-    const root = document.documentElement
-    if (mode === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
   }, [mode])
 
   const toggleTheme = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'))
+    setMode((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark'
+      try {
+        if (typeof document !== 'undefined') {
+          const root = document.documentElement
+          if (next === 'dark') root.classList.add('dark')
+          else root.classList.remove('dark')
+        }
+        localStorage.setItem('theme', next)
+      } catch {}
+      return next
+    })
   }
 
   return (
