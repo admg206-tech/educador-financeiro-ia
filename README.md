@@ -1,20 +1,26 @@
-# Educador Financeiro IA
+# Educador Financeiro IA + Relógio Mundial
 
-🏆 Uma aplicação web inteligente para análise de finanças pessoais com IA Generativa.
-
-## 🎯 Sobre o Projeto
-
-O **Educador Financeiro** é um simulador assistido que mapeia o ecossistema financeiro pessoal do usuário e gera diagnósticos personalizados com recomendações estratégicas usando o Google Gemini.
+🏆 Uma aplicação web inteligente para análise de finanças pessoais com IA Generativa + Relógio Digital com múltiplos fusos horários.
 
 ## ✨ Funcionalidades
 
-- 📋 **Formulário em Etapas**: Coleta dados pessoais, despesas, e objetivos financeiros
-- 🎨 **Tema Claro/Escuro**: Interface adaptável com persistência de preferência
-- 🤖 **Integração com Google Gemini**: Análise inteligente de dados financeiros
-- 💾 **Persistência Local**: Dados salvos automaticamente no localStorage
-- 📊 **Análise Personalizada**: Diagnóstico, recomendações e próximos passos
-- ♿ **Acessibilidade**: Suporte ARIA e navegação por teclado
-- 📱 **Responsive Design**: Funciona em desktop, tablet e mobile
+### 💰 Educador Financeiro
+- 📋 Formulário em 4 etapas para coleta de dados financeiros
+- 🎨 Tema claro/escuro com persistência
+- 🤖 Integração com Google Gemini para análise inteligente
+- 💾 Persistência local de simulações
+- 📊 Diagnóstico, recomendações e próximos passos
+- ♿ Acessibilidade ARIA completa
+- 📱 Responsive design (desktop, tablet, mobile)
+
+### ⏰ Relógio Mundial
+- 🌍 Visualização de múltiplos fusos horários simultaneamente
+- 🕐 Relógios digitais em tempo real (atualização a cada segundo)
+- 🌐 12 fusos horários populares pré-configurados
+- ➕ Adicionar/remover fusos horários dinamicamente
+- 📅 Exibição de data no formato local
+- 🔄 Cálculo automático de offsets UTC
+- 🎯 Interface intuitiva e responsiva
 
 ## 🛠️ Stack Técnico
 
@@ -22,164 +28,179 @@ O **Educador Financeiro** é um simulador assistido que mapeia o ecossistema fin
 - **Bundler**: Vite
 - **Estilos**: Tailwind CSS
 - **IA**: Google Generative AI (Gemini)
+- **APIs**: Intl (Internacionalização)
 - **Persistência**: localStorage
 
 ## 📦 Instalação
 
 ### Pré-requisitos
-
 - Node.js 16+
 - npm ou yarn
-- Chave de API do Google Gemini ([obter aqui](https://makersuite.google.com/app/apikey))
+- Chave de API do Google Gemini (para o Educador Financeiro)
 
 ### Passos
 
-1. **Clone o repositório**
-   ```bash
-   git clone https://github.com/admg206-tech/educador-financeiro-ia.git
-   cd educador-financeiro-ia
-   ```
+```bash
+# 1. Clone o repositório
+git clone https://github.com/admg206-tech/educador-financeiro-ia.git
+cd educador-financeiro-ia
 
-2. **Instale as dependências**
-   ```bash
-   npm install
-   ```
+# 2. Instale as dependências
+npm install
 
-3. **Configure a variável de ambiente**
-   ```bash
-   cp .env.example .env.local
-   # Edite .env.local e adicione sua chave de API Gemini
-   ```
+# 3. Configure as variáveis de ambiente (opcional)
+cp .env.example .env.local
+# Adicione sua chave VITE_GEMINI_API_KEY
 
-4. **Inicie o servidor de desenvolvimento**
-   ```bash
-   npm run dev
-   ```
+# 4. Inicie o servidor de desenvolvimento
+npm run dev
 
-5. **Acesse a aplicação**
-   - Abra [http://localhost:5173](http://localhost:5173) no seu navegador
+# 5. Acesse a aplicação
+# http://localhost:5173
+```
 
 ## 🎯 Como Usar
 
-1. Cole sua chave de API do Google Gemini no campo de configuração
-2. Preencha o formulário com seus dados financeiros:
-   - **Etapa 1**: Informações pessoais (nome, idade, renda)
-   - **Etapa 2**: Despesas fixas mensais
-   - **Etapa 3**: Objetivo financeiro e valor disponível
-   - **Etapa 4**: Revisão do resumo
-3. Clique em "Analisar com IA" para gerar análise personalizada
-4. Revise o diagnóstico, recomendações e próximos passos
+### Educador Financeiro
+1. Cole sua chave de API do Google Gemini
+2. Preencha o formulário com seus dados financeiros
+3. Revise o resumo
+4. Clique em "Analisar com IA"
+5. Receba diagnóstico personalizado
 
-## 📁 Estrutura do Projeto
+### Relógio Mundial
+1. Clique na aba "⏰ Relógio Mundial"
+2. Visualize os fusos horários padrão
+3. Use o seletor para adicionar novos fusos
+4. Clique no ✕ para remover fusos
+5. Veja as atualizações em tempo real
+
+## 📂 Estrutura do Projeto
 
 ```
 src/
-├── components/          # Componentes reutilizáveis
+├── components/
 │   ├── Button.tsx
 │   ├── Card.tsx
+│   ├── DigitalClock.tsx          ⭐ NEW
 │   ├── Header.tsx
 │   ├── InputField.tsx
 │   ├── ProgressBar.tsx
 │   ├── SelectField.tsx
 │   ├── ThemeToggle.tsx
+│   ├── TimeZoneGrid.tsx          ⭐ NEW
+│   ├── TimeZoneSelector.tsx      ⭐ NEW
+│   ├── WorldClockWidget.tsx      ⭐ NEW
 │   └── index.ts
-├── contexts/            # Context API
+├── contexts/
 │   └── ThemeContext.tsx
-├── features/            # Funcionalidades principais
+├── features/
 │   ├── api/
-│   │   └── ApiKeyInput.tsx
 │   └── form/
-│       ├── AnalysisResult.tsx
-│       ├── MultiStepForm.tsx
-│       └── steps/
-│           ├── FormStep.tsx
-│           ├── StepExpenses.tsx
-│           ├── StepFinancialGoals.tsx
-│           ├── StepPersonalInfo.tsx
-│           └── StepSummary.tsx
-├── hooks/               # Custom hooks
+├── hooks/
 │   ├── useAnalysisHistory.ts
 │   ├── useFormData.ts
 │   ├── useGeminiAnalysis.ts
+│   ├── useMultipleTimeZones.ts   ⭐ NEW
 │   └── index.ts
-├── types/               # Tipos TypeScript
-│   └── index.ts
-├── utils/               # Funções utilitárias
-│   ├── storage.ts
-│   └── validation.ts
+├── pages/
+│   └── ClockPage.tsx             ⭐ NEW
+├── types/
+├── utils/
 ├── App.tsx
 ├── main.tsx
 └── index.css
 ```
 
-## 🔑 Variáveis de Ambiente
+## 🕐 Fusos Horários Suportados
 
-```env
-VITE_GEMINI_API_KEY=sua_chave_api_aqui
-VITE_APP_NAME=Educador Financeiro IA
-```
+| Timezone | Label | Offset |
+|----------|-------|--------|
+| UTC | UTC (Coordenada Universal) | ±00:00 |
+| America/Sao_Paulo | São Paulo (BRT) | -03:00 |
+| America/New_York | Nova York (EST/EDT) | -05:00 / -04:00 |
+| Europe/London | Londres (GMT/BST) | ±00:00 / +01:00 |
+| Europe/Paris | Paris (CET/CEST) | +01:00 / +02:00 |
+| Asia/Tokyo | Tóquio (JST) | +09:00 |
+| Asia/Hong_Kong | Hong Kong (HKT) | +08:00 |
+| Australia/Sydney | Sydney (AEDT/AEST) | +10:00 / +11:00 |
+| Asia/Dubai | Dubai (GST) | +04:00 |
+| Asia/Singapore | Singapura (SGT) | +08:00 |
+| America/Los_Angeles | Los Angeles (PST/PDT) | -08:00 / -07:00 |
+| Asia/Kolkata | Índia (IST) | +05:30 |
 
 ## 📝 Scripts Disponíveis
 
 ```bash
-# Desenvolvimento
-npm run dev
-
-# Build para produção
-npm run build
-
-# Preview do build
-npm run preview
-
-# Validar tipos TypeScript
-npm run type-check
-
-# Linter
-npm run lint
-
-# Formatar código
-npm run format
+npm run dev          # Desenvolvimento
+npm run build        # Build produção
+npm run preview      # Preview do build
+npm run type-check   # Validar tipos TypeScript
+npm run lint         # Linter
+npm run format       # Formatar código
 ```
 
-## ✅ Validações
+## 🎨 Personalização
 
-- Nome: Mínimo 2 caracteres
-- Idade: Entre 1 e 150 anos
-- Renda: Maior que 0
-- Objetivo: Obrigatório
-- Valor de investimento: Não negativo
+### Adicionar mais fusos horários
+
+Edite `src/hooks/useMultipleTimeZones.ts`:
+
+```typescript
+const COMMON_TIMEZONES = [
+  // ... fusos existentes
+  { timezone: 'America/Mexico_City', label: 'Cidade do México (CST/CDT)' },
+]
+```
+
+### Mudar cor principal
+
+Edite `tailwind.config.js`:
+
+```javascript
+colors: {
+  primary: {
+    DEFAULT: '#6d28d9', // Mude esta cor
+  },
+}
+```
 
 ## 🚀 Deploy
 
 ### Vercel
-
-1. Push seu código para o GitHub
-2. Conecte seu repositório no [Vercel](https://vercel.com)
-3. Configure a variável de ambiente `VITE_GEMINI_API_KEY`
-4. Deploy automático em cada push
-
-### GitHub Pages
-
 ```bash
-npm run build
-# Faça deploy da pasta dist/ para GitHub Pages
+npm install -g vercel
+vercel
 ```
 
-## 🤝 Contribuição
+### GitHub Pages
+```bash
+npm run build
+# Deploy a pasta dist/
+```
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+### Netlify
+```bash
+npm run build
+# Arraste a pasta dist/ para Netlify
+```
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+## 🔧 Recursos Futuros
+
+- [ ] Comparação de fusos horários
+- [ ] Conversor de hora entre fusos
+- [ ] Alertas de reunião em múltiplos fusos
+- [ ] Exportar relógio como imagem
+- [ ] Sincronização em tempo real com servidor
+- [ ] Gráficos de análise financeira
+- [ ] Relatórios em PDF
+- [ ] Progressive Web App (PWA)
 
 ## 📄 Licença
 
 MIT © 2024 admg206-tech
 
-## 📞 Suporte
+## 💬 Suporte
 
 Para dúvidas ou sugestões, abra uma [issue](https://github.com/admg206-tech/educador-financeiro-ia/issues).
 
@@ -190,3 +211,4 @@ Para dúvidas ou sugestões, abra uma [issue](https://github.com/admg206-tech/ed
 - [Vite Guide](https://vitejs.dev)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Google Generative AI](https://ai.google.dev)
+- [Intl API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
